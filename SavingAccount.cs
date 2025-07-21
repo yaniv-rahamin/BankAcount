@@ -6,31 +6,36 @@ using System.Threading.Tasks;
 
 namespace BankAcount
 {
-    internal class SavingAccount
+    internal class SavingAccount : BasicAccount
     {
-        private int type, account, id, year;
-        private double monthlyDeposit, balance;
+        #region fields
+        private int type, year;
+        private double monthlyDeposit;
+        #endregion 
 
-        public SavingAccount(int type, int account, int id, double monthlyDeposit, double balance)
+        #region constructors    
+        public SavingAccount(int type, int account, int id, int bankBranch, int bank, double monthlyDeposit, double balance):base(account, id,bankBranch,bank ,balance)
         {
-            this.type = type;
-            this.account = account;
-            this.id = id;
+            this.type = type;          
             this.monthlyDeposit = monthlyDeposit;
-            this.balance = balance;
             this.year = DateTime.Now.Year;
         }
-        public int getType() { return this.type; }
-        public int getAccount() { return this.account; }
-        public int getId() { return this.id; }
-        public double getMonthlyDeposit() { return this.monthlyDeposit; }
-        public double getBalance() { return this.balance; }
-        public int getYear() { return this.year; }
+        #endregion
 
+        #region getters 
+        public int getType() { return this.type; }       
+        public double getMonthlyDeposit() { return this.monthlyDeposit; }
+        public int getYear() { return this.year; }
+        #endregion
+
+        #region setters 
         public void setMonthlyDeposit(double monthlyDeposit)
         {
             this.monthlyDeposit = monthlyDeposit;
         }
+        #endregion
+
+        #region mathods
         public void MonthlyDeposit()
         {
             this.balance += monthlyDeposit;
@@ -41,6 +46,14 @@ namespace BankAcount
                 return DateTime.Now.Year - year;
             return 0;
         }
+        #endregion
+
+        #region ToString
+        public override string ToString()
+        {
+            return $"Type: {type}, Monthly Deposit: {monthlyDeposit}, Year: {year}" + base.ToString();
+        }
+        #endregion  
     }
 
 }

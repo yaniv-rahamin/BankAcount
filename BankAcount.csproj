@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicAccount.cs" />
+    <Compile Include="BusinessAccount.cs" />
     <Compile Include="CheckingAccount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
