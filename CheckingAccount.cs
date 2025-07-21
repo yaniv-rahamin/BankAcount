@@ -6,56 +6,61 @@ using System.Threading.Tasks;
 
 namespace BankAcount
 {
-    internal class CheckingAccount  
+    public class CheckingAccount:BasicAccount
     {
-        private int account, bankBranch, bank, id;
-        private double balance, approvedOverdraft;
+        #region fields
+       protected double approvedOverdraft;
+        #endregion
 
-        public CheckingAccount(int account, int bankBranch, int bank, int id, int balance, int approvedOverdraft)
-        {
-            this.account = account;
-            this.bankBranch = bankBranch;
-            this.bank = bank;
-            this.id = id;
-            this.balance = balance;
+        #region constructors
+        public CheckingAccount(int account, int bankBranch, int bank, int id, double balance, double approvedOverdraft):base(account, id,bankBranch,bank, balance)
+        {           
+          
             this.approvedOverdraft = approvedOverdraft;
         }
+        #endregion
 
-        public int GetAccount()
-        { return this.account; }
-        public int GetBankBranch()
-        { return this.bankBranch; }
-        public int GetId()
-        { return this.id; }
-        public double GetBalance()
-        { return this.balance; }
+        #region getters
         public double GetApprovedOverdraft()
         { return this.approvedOverdraft; }
-        public int GetBank()
-        { return this.bank; }
+        #endregion
 
-       
-        public void SetBankBranch(int bankBranch)
-        { this.bankBranch = bankBranch; }
+        #region setters
         public void SetApprovedOverdraft(double approvedOverdraft) 
         { this.approvedOverdraft = approvedOverdraft; }
-        
+        #endregion
+
+        #region methods
         public void Deposit(double Deposit)
         {
-            this.balance = Deposit;
+            if (Deposit < 0)
+            {
+                Console.WriteLine("Deposit amount cannot be negative.");
+                return;
+            }
+            this.balance += Deposit;
           
         }
         public bool Withrawal(double withrawal)
         {
-            if(WithrawalAllowed()-withrawal>=0)
-                return true;
+            if (this.balance + approvedOverdraft - withrawal >= 0)
+            {
+                balance -= withrawal;
+                return true;    
+            }
+               
             return false;
         }
+        #endregion
 
-        private double WithrawalAllowed()
+        #region ToString
+        public override string ToString()
         {
-            return this.balance+approvedOverdraft; 
+            return $"Approved Overdraft: {approvedOverdraft}" +base.ToString();
         }
+        #endregion  
+
+
 
 
 
