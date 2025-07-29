@@ -9,13 +9,13 @@ namespace BankAcount
     public class CheckingAccount:BasicAccount
     {
         #region fields
-       protected double approvedOverdraft;
+        protected double approvedOverdraft;
         #endregion
 
         #region constructors
-        public CheckingAccount(int account, int bankBranch, int bank, int id, double balance, double approvedOverdraft):base(account, id,bankBranch,bank, balance)
-        {           
-          
+        public CheckingAccount(int account, int bankBranch, int bank, int id, double balance, double approvedOverdraft) : base(account, id, bankBranch, bank, balance)
+        {
+
             this.approvedOverdraft = approvedOverdraft;
         }
         #endregion
@@ -26,7 +26,7 @@ namespace BankAcount
         #endregion
 
         #region setters
-        public void SetApprovedOverdraft(double approvedOverdraft) 
+        public void SetApprovedOverdraft(double approvedOverdraft)
         { this.approvedOverdraft = approvedOverdraft; }
         #endregion
 
@@ -39,25 +39,24 @@ namespace BankAcount
                 return;
             }
             this.balance += Deposit;
-          
+
         }
         public bool Withrawal(double withrawal)
         {
             if (this.balance + approvedOverdraft - withrawal >= 0)
             {
                 balance -= withrawal;
-                return true;    
+                return true;
             }
-               
+
             return false;
         }
         #endregion
 
-
         #region ToString
         public override string ToString()
         {
-            return $"Approved Overdraft: {approvedOverdraft}" +base.ToString();
+            return $"Approved Overdraft: {approvedOverdraft}" + base.ToString();
         }
         #endregion  
 
